@@ -1,0 +1,6 @@
+---
+scheduled:
+  - name: Monthly Loan Repayments
+    csv: c_10bray.csv
+    frequency: monthly
+    start_date: "2022-03-19"
