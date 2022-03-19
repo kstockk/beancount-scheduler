@@ -1,10 +1,11 @@
 
 import subprocess
 from datetime import date, datetime
+import sys
 import yaml
 
-def parse_yaml():
-    with open("scheduled.yml", "r") as f:
+def parse_yaml(yaml_file):
+    with open(yaml_file, "r") as f:
         try:
             parsed_yaml=yaml.safe_load(f)
             return parsed_yaml
@@ -20,10 +21,10 @@ def odd_even(x):
 def post(csv_file):
     subprocess.run(['docker exec fava bash -c "bean-extract /bean/config/ledger_importers/config.py /bean/data/scheduled/' + csv_file + ' >> /bean/data/inbox.beancount"'], shell=True)
 
-def main():
+def main(yaml_file):
     today = date.today()
 
-    file = parse_yaml()
+    file = parse_yaml(yaml_file)
     for list in file.values():
         for dict_item in list:
             start_date = datetime.strptime(dict_item["start_date"], '%Y-%m-%d').date()
@@ -42,4 +43,4 @@ def main():
                 pass
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1])
