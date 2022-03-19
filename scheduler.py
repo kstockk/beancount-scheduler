@@ -18,7 +18,7 @@ def odd_even(x):
         return False
 
 def post(csv_file):
-    subprocess.run(['docker exec fava bash -c "bean-extract /bean/config/ledger_importers/config.py /bean/data/scheduled/' + csv_file + ' >> /bean/data/inbox.beancount"'])
+    subprocess.run(['docker exec fava bash -c "bean-extract /bean/config/ledger_importers/config.py /bean/data/scheduled/' + csv_file + ' >> /bean/data/inbox.beancount"'], shell=True)
 
 def main():
     today = date.today()
