@@ -35,7 +35,7 @@ def main(yaml_file):
                     post(csv_file)
             elif frequency == "fortnightly":
                 if odd_even(start_date.isocalendar().week) == odd_even(today.isocalendar().week):
-                    if start_date.isocalendar().week != today.isocalendar().week:
+                    if start_date.weekday() is today.weekday():
                         post(csv_file)
             elif frequency == "weekly":
                 if start_date.weekday() is today.weekday():
